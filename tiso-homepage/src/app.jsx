@@ -176,7 +176,7 @@ const productsByCategory = {
       price: "SAR 13",
       calories: "350 kcal",
       modelUrl:
-        "https://raw.githubusercontent.com/Vasiq89/tiso-homepage/cd0063c9768615d3faee3248ef5e2ce04cd40f3c/tiso-homepage/public/Pancake%20final.glb",
+        "https://raw.githubusercontent.com/vasiq8/AR-DEMO/4cca700769ed3cc1a77c37375676287ef1079e32/optimized_pancake.glb",
     },
   ],
   DRINKS: [
