@@ -5,17 +5,6 @@ import './app.css';
 import strikeImg from './assets/strike.jpeg';
 import searchImg from './assets/search.jpeg';
 
-// Food Gallery images
-import pizzaImg    from './assets/pizza.jpeg';
-import sandwichImg from './assets/sandwich.jpeg';
-import onigiriImg  from './assets/onigiri.jpeg';
-import burgerImg   from './assets/burger.jpeg';
-import fishImg     from './assets/fish.jpeg';
-import noodlesImg  from './assets/noodles.jpeg';
-import ricebowlImg from './assets/ricebowl.jpeg';
-import saladImg    from './assets/salad.jpeg';
-import shawarmaImg from './assets/shawarma.jpeg';
-
 // Products mapping for AR products
 const productsByCategory = {
   PIZZA: [
@@ -224,30 +213,35 @@ const productsByCategory = {
 function App() {
   // Navbar + search/menu
   const [searchOpen, setSearchOpen]   = useState(false);
-  const [menuOpen, setMenuOpen]       = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
 
   // Product‑modal state
   const [currentCategoryProducts, setCurrentCategoryProducts] = useState([]);
-  const [productIndex, setProductIndex]                       = useState(0);
   const [animClass, setAnimClass]                             = useState("");
 
   // Refs for click‑outside & AR
   const searchRef = useRef(null);
-  const menuRef   = useRef(null);
   const arModelRef = useRef(null);
 
   // Flatten all products for search lookup
   const allProducts = Object.values(productsByCategory).flat();
+
+  const foodCategories = Object.keys(productsByCategory);
+
+  // Add new useEffect to select first category on mount
+  useEffect(() => {
+    const firstCategory = foodCategories[0];
+    if (firstCategory) {
+      setCurrentCategoryProducts(productsByCategory[firstCategory] || []);
+    }
+  }, []); // Empty dependency array means this runs once on mount
 
   // Hide dropdowns on outside click
   useEffect(() => {
     const handleClickOutside = e => {
       if (searchRef.current && !searchRef.current.contains(e.target))
         setSearchOpen(false);
-      if (menuRef.current && !menuRef.current.contains(e.target))
-        setMenuOpen(false);
     };
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
@@ -256,20 +250,13 @@ function App() {
   // Toggle handlers
   const toggleSearch = () => {
     setSearchOpen(o => !o);
-    if (menuOpen) setMenuOpen(false);
     if (!searchOpen) setTimeout(() => document.querySelector(".search-input")?.focus(), 100);
-  };
-  const toggleMenu = () => {
-    setMenuOpen(o => !o);
-    if (searchOpen) setSearchOpen(false);
   };
 
   // Show details for a clicked category
   const handleCategoryClick = category => {
     const items = productsByCategory[category] || [];
     setCurrentCategoryProducts(items);
-    setProductIndex(0);
-    setMenuOpen(false);
   };
 
   // Search submit (on Enter)
@@ -280,7 +267,6 @@ function App() {
     const found = allProducts.find(p => p.name.toLowerCase().includes(q));
     if (found) {
       setCurrentCategoryProducts([found]);
-      setProductIndex(0);
       setSearchOpen(false);
     } else {
       alert("No product found. Try another name.");
@@ -303,39 +289,10 @@ function App() {
 
   const handleSearchResultClick = (product) => {
     setCurrentCategoryProducts([product]);
-    setProductIndex(0);
     setSearchOpen(false);
     setSearchQuery("");
     setSearchResults([]);
   };
-
-  // Carousel arrows
-  const handleNextProduct = () => {
-    if (currentCategoryProducts.length < 2) return;
-    setAnimClass("slide-out-left");
-    setTimeout(() => {
-      setProductIndex(i => (i + 1) % currentCategoryProducts.length);
-      setAnimClass("slide-in-right");
-    }, 300);
-    setTimeout(() => setAnimClass(""), 600);
-  };
-  const handlePrevProduct = () => {
-    if (currentCategoryProducts.length < 2) return;
-    setAnimClass("slide-out-right");
-    setTimeout(() => {
-      setProductIndex(i =>
-        (i - 1 + currentCategoryProducts.length) % currentCategoryProducts.length
-      );
-      setAnimClass("slide-in-left");
-    }, 300);
-    setTimeout(() => setAnimClass(""), 600);
-  };
-
-  // Currently selected
-  const selectedProduct =
-    currentCategoryProducts.length > 0
-      ? currentCategoryProducts[productIndex]
-      : null;
 
   // Activate AR
   const viewInAR = () => {
@@ -346,21 +303,10 @@ function App() {
     }
   };
 
-  const foodCategories = Object.keys(productsByCategory);
-
   return (
     <div className="app">
       {/* Navbar */}
-      <header
-        className={`navbar ${menuOpen ? "menu-active" : ""} ${
-          searchOpen ? "search-active" : ""
-        }`}>
-        <img
-          src={strikeImg}
-          alt="Menu"
-          className="icon menu-icon"
-          onClick={toggleMenu}
-        />
+      <header className={`navbar ${searchOpen ? "search-active" : ""}`}>
         <h1 className="logo">TISO MEALS</h1>
         <img
           src={searchImg}
@@ -370,60 +316,66 @@ function App() {
         />
       </header>
 
+      {/* Categories Sidebar */}
+      <div className="categories-sidebar">
+        {foodCategories.map((cat, i) => (
+          <div
+            key={i}
+            className="category-box"
+            onClick={() => handleCategoryClick(cat)}>
+            {cat}
+          </div>
+        ))}
+      </div>
+
+      {/* Products Grid */}
+      {currentCategoryProducts.length > 0 && (
+        <div className="products-grid">
+          {currentCategoryProducts.map((product, index) => (
+            <div key={index} className="product-card">
+              <h3>{product.name}</h3>
+              <p>{product.description}</p>
+              <p>Price: {product.price}</p>
+              <p>Calories: {product.calories}</p>
+              <div className="ar-preview">
+                <model-viewer
+                  src={product.modelUrl}
+                  alt={`${product.name} AR Model`}
+                  camera-controls
+                  auto-rotate
+                  ar
+                  ar-modes="scene-viewer webxr quick-look"
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    position: "absolute",
+                    top: 0,
+                    left: 0
+                  }}
+                />
+              </div>
+              <button className="ar-button" onClick={() => viewInAR()}>
+                View in AR
+              </button>
+            </div>
+          ))}
+        </div>
+      )}
+
       {/* Blur overlay */}
-      {(menuOpen || searchOpen || selectedProduct) && (
+      {searchOpen && (
         <div
           className="blur-overlay"
           onClick={() => {
-            setMenuOpen(false);
             setSearchOpen(false);
           }}
         />
-      )}
-
-      {/* Menu dropdown */}
-      {menuOpen && (
-        <div className="menu-dropdown" ref={menuRef}>
-          <div className="menu-header">
-            <button className="menu-close" onClick={() => setMenuOpen(false)}>
-              ×
-            </button>
-            <div className="menu-title">TISO MEALS</div>
-            <img
-              src={searchImg}
-              alt="Search"
-              className="icon small-icon"
-              onClick={() => {
-                setMenuOpen(false);
-                setSearchOpen(true);
-              }}
-            />
-          </div>
-          <div className="menu-categories">
-            {foodCategories.map((cat, i) => (
-              <div
-                key={i}
-                className="menu-category"
-                onClick={() => handleCategoryClick(cat)}>
-                {cat}
-              </div>
-            ))}
-          </div>
-        </div>
       )}
 
       {/* Search dropdown */}
       {searchOpen && (
         <div className="search-dropdown" ref={searchRef}>
           <div className="search-header">
-            <div
-              className="search-hamburger"
-              onClick={() => {
-                setSearchOpen(false);
-                setMenuOpen(true);
-              }}>
-              ≡
-            </div>
             <div className="search-title">SEARCH</div>
             <button className="search-close" onClick={() => setSearchOpen(false)}>
               ×
@@ -453,74 +405,6 @@ function App() {
           </div>
         </div>
       )}
-
-      {/* Product Details Modal */}
-      {selectedProduct && (
-        <div className="product-details">
-          <button
-            className="close-product"
-            onClick={() => setCurrentCategoryProducts([])}>
-            ×
-          </button>
-
-          {currentCategoryProducts.length > 1 && (
-            <>
-              <button className="arrow-button left" onClick={handlePrevProduct}>
-                ←
-              </button>
-              <button className="arrow-button right" onClick={handleNextProduct}>
-                →
-              </button>
-            </>
-          )}
-
-          <div className={`product-details-content ${animClass}`}>
-            <img
-              className="product-image"
-            />
-            <div className="product-info">
-              <h2>{selectedProduct.name}</h2>
-              <p>{selectedProduct.description}</p>
-              <p>Price: {selectedProduct.price}</p>
-              <p>Calories: {selectedProduct.calories}</p>
-            </div>
-
-            <div className="ar-preview">
-              <model-viewer
-                ref={arModelRef}
-                src={selectedProduct.modelUrl}
-                alt={`${selectedProduct.name} AR Model`}
-                camera-controls
-                auto-rotate
-                ar
-                ar-modes="scene-viewer webxr quick-look"
-                style={{
-                  width: "100%",
-                  maxWidth: "59%",
-                  height: "300px",
-                  margin: "0 auto",
-                }}
-              />
-            </div>
-            <button className="ar-button" onClick={viewInAR}>
-              View in AR
-            </button>
-          </div>
-        </div>
-      )}
-
-      {/* Food Gallery */}
-      <div className="food-gallery">
-        <img src={pizzaImg}    alt="Pizza"    className="food food1" />
-        <img src={sandwichImg} alt="Sandwich" className="food food2" />
-        <img src={onigiriImg}  alt="Onigiri"  className="food food3" />
-        <img src={burgerImg}   alt="Burger"   className="food food4" />
-        <img src={fishImg}     alt="Fish"     className="food food5" />
-        <img src={noodlesImg}  alt="Noodles"  className="food food6" />
-        <img src={ricebowlImg} alt="Rice Bowl"className="food food7" />
-        <img src={saladImg}    alt="Salad"    className="food food8" />
-        <img src={shawarmaImg} alt="Shawarma" className="food food9" />
-      </div>
     </div>
   );
 }
