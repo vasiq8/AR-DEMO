@@ -44,7 +44,7 @@ const productsByCategory = {
       name: "Burger Lowpoly",
       image: "/assets/burger_lowpoly.glb",
       description: "Stylized low poly burger for a modern look.",
-      price: "$10",
+      price: "SAR10",
       calories: "400 kcal",
       modelUrl:
         "https://raw.githubusercontent.com/vasiq8/tiso-homepage/b61db800da21f2e9ca6adc880cd936a75b111ade/burger_lowpoly.glb",
@@ -53,7 +53,7 @@ const productsByCategory = {
       name: "Hamburger 3D",
       image: "/assets/hamburger_3d_scan.glb",
       description: "Realistic 3D scanned hamburger experience.",
-      price: "$11",
+      price: "SAR11",
       calories: "420 kcal",
       modelUrl:
         "https://raw.githubusercontent.com/vasiq8/tiso-homepage/b61db800da21f2e9ca6adc880cd936a75b111ade/hamburger_3d_scan.glb",
@@ -64,7 +64,7 @@ const productsByCategory = {
       name: "Best Spring Sandwich",
       image: "/assets/best_spring_sandwitch.glb",
       description: "Fresh, light, and flavorful spring sandwich.",
-      price: "$9",
+      price: "SAR9",
       calories: "350 kcal",
       modelUrl:
         "https://raw.githubusercontent.com/vasiq8/tiso-homepage/8c43ccb15e10e4757b61c32be10d0c0469ba56cf/best_spring_sandwitch.glb",
@@ -73,7 +73,7 @@ const productsByCategory = {
       name: "Grilled Sandwich",
       image: "/assets/grilled_sandwich.glb",
       description: "Delicious grilled sandwich with melted cheese.",
-      price: "$8",
+      price: "SAR8",
       calories: "300 kcal",
       modelUrl:
         "https://raw.githubusercontent.com/vasiq8/tiso-homepage/8c43ccb15e10e4757b61c32be10d0c0469ba56cf/grilled_sandwich%20(1).glb",
@@ -84,7 +84,7 @@ const productsByCategory = {
       name: "Asian Take‑Out Noodles",
       image: "/assets/asian_take_out_container_w_noodles.glb",
       description: "Savory noodles in an authentic Asian take‑out container.",
-      price: "$11",
+      price: "SAR11",
       calories: "400 kcal",
       modelUrl:
         "https://raw.githubusercontent.com/vasiq8/tiso-homepage/8c43ccb15e10e4757b61c32be10d0c0469ba56cf/asian_take_out_container_w_noodles.glb",
@@ -124,7 +124,7 @@ const productsByCategory = {
       name: "Breakfast Food Dish",
       image: "/assets/breakfast_food_dish.glb",
       description: "Hearty and healthy breakfast salad dish.",
-      price: "$9",
+      price: "SAR9",
       calories: "220 kcal",
       modelUrl:
         "https://raw.githubusercontent.com/vasiq8/tiso-homepage/b61db800da21f2e9ca6adc880cd936a75b111ade/breakfast_food_dish.glb",
@@ -135,7 +135,7 @@ const productsByCategory = {
       name: "Seafood Platter",
       image: "/assets/seafood.glb",
       description: "A delightful assortment of fresh seafood.",
-      price: "$15",
+      price: "SAR15",
       calories: "250 kcal",
       modelUrl:
         "https://raw.githubusercontent.com/vasiq8/tiso-homepage/8c43ccb15e10e4757b61c32be10d0c0469ba56cf/seafood.glb",
@@ -144,7 +144,7 @@ const productsByCategory = {
       name: "Toro Sushi",
       image: "/assets/toro_sushi.glb",
       description: "Premium toro sushi, melt‑in‑your‑mouth delight.",
-      price: "$20",
+      price: "SAR20",
       calories: "210 kcal",
       modelUrl:
         "https://raw.githubusercontent.com/vasiq8/tiso-homepage/8c43ccb15e10e4757b61c32be10d0c0469ba56cf/toro_sushi.glb",
@@ -155,7 +155,7 @@ const productsByCategory = {
       name: "The Cake Is A Lie",
       image: "/assets/the_cake_is_a_lie.glb",
       description: "A mysterious dessert that defies expectations.",
-      price: "$8",
+      price: "SAR8",
       calories: "250 kcal",
       modelUrl:
         "https://raw.githubusercontent.com/vasiq8/tiso-homepage/b61db800da21f2e9ca6adc880cd936a75b111ade/the_cake_is_a_lie.glb",
@@ -164,7 +164,7 @@ const productsByCategory = {
       name: "Ice Cream",
       image: "/assets/ice_cream_lp.glb",
       description: "Cool and refreshing ice cream treat.",
-      price: "$5",
+      price: "SAR5",
       calories: "200 kcal",
       modelUrl:
         "https://raw.githubusercontent.com/vasiq8/tiso-homepage/b61db800da21f2e9ca6adc880cd936a75b111ade/ice_cream_lp.glb",
@@ -173,7 +173,7 @@ const productsByCategory = {
       name: "Pancake",
     
       description: "A mysterious Pancake that defies expectations.",
-      price: "SAR 13",
+      price: "SAR 15",
       calories: "350 kcal",
       modelUrl:
         "https://raw.githubusercontent.com/vasiq8/AR-DEMO/4cca700769ed3cc1a77c37375676287ef1079e32/optimized_pancake.glb",
@@ -184,7 +184,7 @@ const productsByCategory = {
       name: "Fizzy Drink",
       image: "/assets/fizzy_drink.glb",
       description: "Refreshing fizzy drink to quench your thirst.",
-      price: "$4",
+      price: "SAR4",
       calories: "150 kcal",
       modelUrl:
         "https://raw.githubusercontent.com/Vasiq89/tiso-homepage/cd0063c9768615d3faee3248ef5e2ce04cd40f3c/ruabzatangentset-opt.glb",
@@ -193,7 +193,7 @@ const productsByCategory = {
       name: "Monster Energy Drink",
       image: "/assets/monster_energy_drink.glb",
       description: "High-energy Monster drink for a boost.",
-      price: "$5",
+      price: "SAR5",
       calories: "200 kcal",
       modelUrl:
         "https://raw.githubusercontent.com/vasiq8/tiso-homepage/8c43ccb15e10e4757b61c32be10d0c0469ba56cf/monster_energy_drink.glb",
@@ -202,7 +202,7 @@ const productsByCategory = {
       name: "Test Pizza",
       image: "/assets/tea.glb",
       description: "A soothing cup of tea to warm you up.",
-      price: "$3",
+      price: "SAR3",
       calories: "0 kcal",
       modelUrl:
         "https://raw.githubusercontent.com/vasiq8/AR-DEMO/2419089cdde8db20cf1c9489c8c7c85b74930191/optimized.glb",
