@@ -210,13 +210,13 @@ const productsByCategory = {
         "https://raw.githubusercontent.com/vasiq8/tiso-homepage/8c43ccb15e10e4757b61c32be10d0c0469ba56cf/monster_energy_drink.glb",
     },
     {
-      name: "Tea",
+      name: "Test Pizza",
       image: "/assets/tea.glb",
       description: "A soothing cup of tea to warm you up.",
       price: "$3",
       calories: "0 kcal",
       modelUrl:
-        "https://raw.githubusercontent.com/vasiq8/tiso-homepage/25432fcb0564d793ec1dcb70e825f034c121d116/tea%20(1).glb",
+        "https://raw.githubusercontent.com/vasiq8/AR-DEMO/2419089cdde8db20cf1c9489c8c7c85b74930191/optimized.glb",
     },
   ],
 };
