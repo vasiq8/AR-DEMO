@@ -32,14 +32,25 @@ body, html, #root {
   width: 200px;
   max-width: 200px;
   display: flex;
-  justify-content: space-between;
+  justify-content: center; /* Changed from space-between */
   align-items: center;
   border: 1.8px solid black;
   background-color: #fff;
-  padding: 12px 20px; /* Adjust padding for two items */
+  padding: 12px 20px;
   z-index: 10;
-  animation: navbarSlide 0.5s ease-out;
-  transition: all 0.5s ease;
+}
+
+/* New style for search icon wrapper */
+.search-icon-wrapper {
+  position: fixed;
+  top: 15px;
+  right: 20px;
+  z-index: 10;
+  background: white;
+  padding: 8px;
+  border-radius: 50%;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  cursor: pointer;
 }
 
 @keyframes navbarSlide {
@@ -85,6 +96,7 @@ body, html, #root {
   cursor: pointer;
   object-fit: contain;
   transition: transform 0.3s ease;
+  display: block; /* Added to ensure proper centering */
 }
 
 .navbar.search-active .search-icon {
@@ -119,8 +131,8 @@ body, html, #root {
   top: 20px;
   left: 50%;
   transform: translateX(-50%);
-  width: 90%;
-  max-width: 456px;
+  width: 90%; /* Reduced from 90% */
+  max-width: 337px; /* Reduced from 456px */
   background-color: white;
   border: 1.8px solid black;
   z-index: 20;
@@ -143,7 +155,7 @@ body, html, #root {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px;
+  padding: 10px; /* Reduced from 15px */
   border-bottom: 1px solid #eee;
 }
 
@@ -155,11 +167,12 @@ body, html, #root {
 
 .search-title {
   font-weight: bold;
-  font-size: 22px;
+  font-size: 14px; /* Reduced from 22px */
+  margin-left: 10px; /* Add left margin to move title right */
 }
 
 .search-close {
-  font-size: 30px;
+  font-size: 25px;
   background: none;
   border: none;
   cursor: pointer;
@@ -169,18 +182,25 @@ body, html, #root {
 .search-input-container {
   position: relative;
   width: calc(100% - 40px); /* Subtract the padding */
-  padding: 20px;
+  padding: 12px; /* Reduced from 20px */
 }
 
 /* Search Input - Update existing styles */
 .search-input {
   width: 100%;
   padding: 8px;
+  padding-left: 12px; /* Add left padding */
   border: none;
   border-bottom: 1px solid #ccc;
-  font-size: 16px;
+  font-size: 12px; /* Reduced from 16px */
   outline: none;
-  box-sizing: border-box; /* Add this to include padding in width calculation */
+  box-sizing: border-box;
+  text-align: left;
+}
+
+.search-input::placeholder {
+  font-size: 11px; /* Even smaller placeholder text */
+  color: #999;
 }
 
 /* Search Results - Update existing styles */
@@ -190,18 +210,19 @@ body, html, #root {
   right: 20px; /* Match container padding */
   background: white;
   border-top: 1px solid #eee;
-  max-height: 200px;
+  max-height: 160px; /* Reduced from 200px */
   overflow-y: auto;
   z-index: 21; /* Above dropdown but below other elements */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .search-result-item {
-  padding: 12px 16px;
+  padding: 8px 12px; /* Reduced from 12px 16px */
   cursor: pointer;
   transition: background-color 0.2s;
   width: 100%;
   box-sizing: border-box; /* Add this to include padding in width calculation */
+  font-size: 14px;
 }
 
 /* Product Details Modal */

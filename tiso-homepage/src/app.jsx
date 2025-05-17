@@ -294,13 +294,20 @@ function App() {
     setSearchResults([]);
   };
 
-  // Activate AR - Update this function
+  // Update the viewInAR function
   const viewInAR = (modelUrl) => {
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    
+    if (!isMobile) {
+      alert("Please open this on a mobile device with camera access to view in AR");
+      return;
+    }
+
     const modelViewer = document.querySelector('model-viewer');
-    if (modelViewer) {
+    if (modelViewer?.canActivateAR) {
       modelViewer.activateAR();
     } else {
-      alert("AR not supported on this device/browser.");
+      alert("AR not supported on this device/browser. Please ensure you have AR capabilities and camera permissions.");
     }
   };
 
@@ -309,13 +316,15 @@ function App() {
       {/* Navbar */}
       <header className={`navbar ${searchOpen ? "search-active" : ""}`}>
         <h1 className="logo">TISO MEALS</h1>
+      </header>
+      <div className="search-icon-wrapper">
         <img
           src={searchImg}
           alt="Search"
           className="icon search-icon"
           onClick={toggleSearch}
         />
-      </header>
+      </div>
 
       {/* Categories Sidebar */}
       <div className="categories-sidebar">
