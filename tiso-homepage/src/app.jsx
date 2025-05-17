@@ -294,10 +294,11 @@ function App() {
     setSearchResults([]);
   };
 
-  // Activate AR
-  const viewInAR = () => {
-    if (arModelRef.current?.activateAR) {
-      arModelRef.current.activateAR();
+  // Activate AR - Update this function
+  const viewInAR = (modelUrl) => {
+    const modelViewer = document.querySelector('model-viewer');
+    if (modelViewer) {
+      modelViewer.activateAR();
     } else {
       alert("AR not supported on this device/browser.");
     }
@@ -339,12 +340,14 @@ function App() {
               <p>Calories: {product.calories}</p>
               <div className="ar-preview">
                 <model-viewer
+                  ref={arModelRef}
                   src={product.modelUrl}
                   alt={`${product.name} AR Model`}
                   camera-controls
                   auto-rotate
                   ar
                   ar-modes="scene-viewer webxr quick-look"
+                  ar-scale="fixed"
                   style={{
                     width: "100%",
                     height: "100%",
@@ -354,7 +357,10 @@ function App() {
                   }}
                 />
               </div>
-              <button className="ar-button" onClick={() => viewInAR()}>
+              <button 
+                className="ar-button" 
+                onClick={() => viewInAR(product.modelUrl)}
+              >
                 View in AR
               </button>
             </div>
