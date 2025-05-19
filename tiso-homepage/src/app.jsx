@@ -222,7 +222,6 @@ function App() {
 
   // Refs for click‑outside & AR
   const searchRef = useRef(null);
-  const arModelRef = useRef(null);
 
   // Flatten all products for search lookup
   const allProducts = Object.values(productsByCategory).flat();
@@ -294,8 +293,8 @@ function App() {
     setSearchResults([]);
   };
 
-  // Update the viewInAR function
-  const viewInAR = (modelUrl) => {
+  // Update the viewInAR function to accept product index
+  const viewInAR = (index) => {
     const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
     
     if (!isMobile) {
@@ -303,7 +302,8 @@ function App() {
       return;
     }
 
-    const modelViewer = document.querySelector('model-viewer');
+    // Get the specific model-viewer for this product
+    const modelViewer = document.querySelector(`#model-viewer-${index}`);
     if (modelViewer?.canActivateAR) {
       modelViewer.activateAR();
     } else {
@@ -349,7 +349,7 @@ function App() {
               <p>Calories: {product.calories}</p>
               <div className="ar-preview">
                 <model-viewer
-                  ref={arModelRef}
+                  id={`model-viewer-${index}`}
                   src={product.modelUrl}
                   alt={`${product.name} AR Model`}
                   camera-controls
@@ -368,7 +368,7 @@ function App() {
               </div>
               <button 
                 className="ar-button" 
-                onClick={() => viewInAR(product.modelUrl)}
+                onClick={() => viewInAR(index)}
               >
                 View in AR
               </button>
