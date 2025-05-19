@@ -29,8 +29,8 @@ body, html, #root {
   top: 15px;
   left: 50%;
   transform: translateX(-50%);
-  width: 200px;
-  max-width: 200px;
+  width: 240px; /* Increased from 200px */
+  max-width: 240px; /* Increased from 200px */
   display: flex;
   justify-content: center; /* Changed from space-between */
   align-items: center;
@@ -83,8 +83,8 @@ body, html, #root {
 }
 
 .logo {
-  font-size: 16px; /* Reduced from 20px */
-  font-weight: 800; /* Slightly reduced weight */
+  font-size: 20px; /* Increased from 16px */
+  font-weight: 800;
   color: black;
   margin: 0;
 }
@@ -451,7 +451,7 @@ body, html, #root {
   row-gap: 20px; /* Increased from 12px */
   background: #f9f9f9;
   align-items: start;
-  grid-auto-rows: 180px; /* Fixed row height */
+  grid-auto-rows: 170px; /* Reduced from 180px */
 }
 
 .product-card {
@@ -459,7 +459,7 @@ body, html, #root {
   border-radius: 8px; /* Reduced from 12px */
   padding: 6px; /* Reduced from 8px */
   box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-  height: 100%; /* Take full height of grid row */
+  height: 170px; /* Reduced from 180px */
   display: flex;           /* Add flex display */
   flex-direction: column;  /* Stack items vertically */
   overflow: hidden; /* Change from auto to hidden */
@@ -480,19 +480,19 @@ body, html, #root {
 .product-card .ar-button {
   width: 100%;
   margin-top: 4px;
-  padding: 4px;
+  padding: 2px; /* Reduced from 4px */
   border: none;
-  border-radius: 6px;
+  border-radius: 4px; /* Reduced from 6px */
   background: #000;
   color: white;
   cursor: pointer;
-  font-size: 10px;
-  margin-top: auto;       /* Push button to bottom */
-  position: sticky;       /* Make button stick */
-  bottom: 0;             /* Stick to bottom */
+  font-size: 8px; /* Reduced from 10px */
+  margin-top: auto;
+  position: sticky;
+  bottom: 0;
   left: 0;
   right: 0;
-  z-index: 1;            /* Ensure button stays on top */
+  z-index: 1;
 }
 
 .ar-preview {
