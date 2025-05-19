@@ -363,6 +363,9 @@ function App() {
                   ar
                   ar-modes="scene-viewer webxr quick-look"
                   ar-scale="fixed"
+                  camera-orbit="0deg 75deg auto"
+                  min-camera-orbit="auto 0deg auto"
+                  max-camera-orbit="auto 90deg auto"
                   style={{
                     width: "100%",
                     height: "100%",
@@ -397,9 +400,12 @@ function App() {
               src={selectedModel}
               camera-controls
               auto-rotate
+              camera-orbit="0deg 75deg auto"
+              min-camera-orbit="auto 0deg auto"
+              max-camera-orbit="auto 90deg auto"
               style={{
                 width: '100%',
-                height: '70vh'
+                height: '100vh'
               }}
             />
           </div>
