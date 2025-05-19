@@ -220,6 +220,10 @@ function App() {
   const [currentCategoryProducts, setCurrentCategoryProducts] = useState([]);
   const [animClass, setAnimClass]                             = useState("");
 
+  // Add new state for 3D modal
+  const [showModal, setShowModal] = useState(false);
+  const [selectedModel, setSelectedModel] = useState(null);
+
   // Refs for click‑outside & AR
   const searchRef = useRef(null);
 
@@ -293,16 +297,18 @@ function App() {
     setSearchResults([]);
   };
 
-  // Update the viewInAR function to accept product index
-  const viewInAR = (index) => {
+  // Update the viewInAR function
+  const viewInAR = (index, modelUrl) => {
     const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
     
     if (!isMobile) {
-      alert("Please open this on a mobile device with camera access to view in AR");
+      // Show 3D viewer modal for desktop
+      setSelectedModel(modelUrl);
+      setShowModal(true);
       return;
     }
 
-    // Get the specific model-viewer for this product
+    // Handle AR for mobile
     const modelViewer = document.querySelector(`#model-viewer-${index}`);
     if (modelViewer?.canActivateAR) {
       modelViewer.activateAR();
@@ -368,12 +374,35 @@ function App() {
               </div>
               <button 
                 className="ar-button" 
-                onClick={() => viewInAR(index)}
+                onClick={() => viewInAR(index, product.modelUrl)}
               >
                 View in AR
               </button>
             </div>
           ))}
+        </div>
+      )}
+
+      {/* Add 3D Model Modal for Desktop */}
+      {showModal && (
+        <div className="model-modal">
+          <div className="model-modal-content">
+            <button 
+              className="close-modal"
+              onClick={() => setShowModal(false)}
+            >
+              ×
+            </button>
+            <model-viewer
+              src={selectedModel}
+              camera-controls
+              auto-rotate
+              style={{
+                width: '100%',
+                height: '70vh'
+              }}
+            />
+          </div>
         </div>
       )}
 
